@@ -131,7 +131,7 @@ def Par_Swap_Solver(fwd,swap,coupon_period=0.5):
     S_maturity = fwd+swap
     float_leg = coupon_period * sum(df[(df['Tenor'] > fwd) & (df['Tenor'] <= S_maturity)]['Fwd_L'] * 
                                        df[(df['Tenor'] > fwd) & (df['Tenor'] <= S_maturity)]['DF'])
-    disc_f = coupon_period * sum(df[(df['Tenor'] <= S_maturity)]['DF'])
+    disc_f = coupon_period * sum(df[(df['Tenor'] > fwd) & (df['Tenor'] <= S_maturity)]['DF'])
     
     return float_leg/disc_f
 
