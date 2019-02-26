@@ -133,7 +133,7 @@ labels = ['1y X 1y','1y X 2y','1y X 3y','1y X 5y','1y X 10y',
 legend = []
 col=[]
 
-fig,ax = plt.subplots(figsize=(7,5))
+
 
 for i in range(len(x1)): 
     if x1[i] < 6: 
@@ -146,23 +146,45 @@ for i in range(len(x1)):
      col.append('b') 
      legend.append('10Y Expiry')
 
-for i in range(len(x1)): 
-    ax.scatter(x1[i],Q2['CMS-Forward'][i],c=col[i],s=30, linewidth=0, label=legend[i])  
+fig,ax = plt.subplots(figsize=(7,5))
 
+for i in range(len(x1)): 
+    ax.scatter(x1[i],Q2['CMS-Forward'][i],c=col[i],s=30, linewidth=0, label=labels[i])  
+
+'''
 handles, labels = ax.get_legend_handles_labels()
 handle_list, label_list = [], []
 for handle, label in zip(handles, labels):
     if label not in label_list:
-        handle_list.append(handle)
+        handle_list.append(handle), 
         label_list.append(label)
 plt.legend(handle_list, label_list)
+'''
 plt.tight_layout()
 plt.title('The Difference between CMS and Forward Swap Rate')
 plt.xticks(x1, labels, rotation=50)
 plt.xlabel('Expiry X Tenor')
 plt.ylabel('CMS - Forward Swap Rate')
 plt.grid()
-plt.savefig("CMS_FSR.png")
+plt.savefig("CMS_FSR.png", bbox_inches='tight')
+plt.show()
+
+
+coverage = []
+for i in range(len(Q2['Coverage'])):
+    coverage += [round(Q2['Coverage'][i], 2)]
+
+fig,ax = plt.subplots(figsize=(7,5))
+
+ax.scatter(x1, coverage, color = 'b')
+ax.plot(x1, np.ones(15), 'r-')
+plt.title('Coverage of Integral when Upper Bound is 0.85')
+plt.xlim(0.94, 1.01)
+plt.xticks(x1, labels, rotation=50)
+plt.xlabel('Expiry X Tenor')
+plt.ylabel('Coverage')
+plt.grid()
+plt.savefig("Coverage.png", bbox_inches='tight')
 plt.show()
 
 
@@ -186,7 +208,7 @@ for i in range(len(x10)):
     Inter_Alpha10[i+1] = Alpha10(x10[i])
     Inter_Rho10[i+1] = Rho10(x10[i])
     Inter_Nu10[i+1] = Nu10(x10[i])
-    Inter_CMS10Y[i+1] = Part_1.Par_Swap_Solver(x10[i],10,0.5)
+    Inter_CMS10Y[i+1] = Part_1.Par_Swap_Solver(x10[i],10)
 
 Expiry10 = np.linspace(0.5, 5, 10)
 DF = Part_1.df
@@ -273,6 +295,7 @@ for i in range(len(Expiry2)):
     CMS2Leg += [day*df2*CMS(F,N,n,T,0.25,alpha, 0.9, rho, nu)]
 
 print("The present value of CMS2Y leg is %s" %(np.sum(CMS2Leg)))
+
 
 
 

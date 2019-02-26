@@ -1,0 +1,79 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Lachaise Assignment
+% LaTeX Template
+% Version 1.0 (26/6/2018)
+%
+% This template originates from:
+% http://www.LaTeXTemplates.com
+%
+% Authors:
+% Marion Lachaise & François Févotte
+% Vel (vel@LaTeXTemplates.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+\usepackage{enumitem}
+\usepackage{dsfont}
+\usepackage{graphicx}
+\input{structure.tex} % Include the file specifying the document structure and custom commands
+
+%----------------------------------------------------------------------------------------
+%	ASSIGNMENT INFORMATION
+%----------------------------------------------------------------------------------------
+
+\title{QF602 Derivatives: Homework \#3} % Title of the assignment
+
+\author{ChanJung Kim} 
+
+\date{\today} % University, school and/or department name(s) and a date
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+	
+	\maketitle % Print the title
+	
+	\section*{Part 3 - Convexity Correction} % Numbered section
+	
+	\subsection*{Valuing CMS Leg}	
+
+
+	
+	\subsection*{Static replication for CMS rate}
+	Through trial and error, we found out that the CMS rates can become unlikely large numbers or even drop below par swap rate when upper bound for payer swaption integral is set as a large number or infinity. To figure out the optimal upper bound that not only covers most of the cases but generates plausible CMS rates, we calculated pure $f(K)$ in CMS rate formula by setting the payoff function as constant 1. When the upper bound is 0.85, no value exceeded 1, and CMS rates converged on reasonable readings.
+
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.5]{Coverage.png}
+		\caption{Coverage of Integral inside of CMS rate when Upper Bound is 0.85}
+	\end{figure}
+	
+	Tables presented below show CMS rates for each maturity and tenor. 
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.5]{CMS_RATE.png}
+		\caption{CMS rates}
+	\end{figure}
+	
+	\pagebreak
+	
+	 \noindent Comparing CMS rates with forward swap rates of corresponding expiry and tenor which are derived from Part 1, we can recognise that the difference between CMS and forward swap rate increases as the expiry lengthens. It means that the longer expiry becomes, the greater the magnitude of convexity correction grows. On the contrary, the influence of tenor on the convexity correction is irregular. This phenomenon is presumed to be a result of volatility smile. 
+
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[scale=0.5]{CMS_FSR.png}
+		\caption{Delta Profile for Up-and-In Barrier Option of Given Condition}
+	\end{figure}
+
+
+
+\end{document}
