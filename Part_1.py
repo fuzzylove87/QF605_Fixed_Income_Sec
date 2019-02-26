@@ -26,6 +26,7 @@ data_IRS  = data_IRS.set_index('Tenor')
 df.merge(data, left_on='Tenor', right_on='Tenor')
 df.merge(data_IRS, left_on='Tenor', right_on='Tenor')
 
+
 df['OIS']=data['Rate']
 df['L'] = data_IRS['Rate']
 
