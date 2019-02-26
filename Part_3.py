@@ -11,7 +11,6 @@ import Part_1
 from scipy.stats import norm
 from scipy.integrate import quad
 from scipy.interpolate import CubicSpline
-from scipy.interpolate import interp1d
 
 # Define necessary functions
 def SABR(F, K, T, alpha, beta, rho, nu):
