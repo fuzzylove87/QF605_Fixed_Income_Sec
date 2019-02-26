@@ -163,6 +163,7 @@ plt.xticks(x1, labels, rotation=50)
 plt.xlabel('Expiry X Tenor')
 plt.ylabel('CMS - Forward Swap Rate')
 plt.grid()
+plt.savefig("CMS_FSR.png")
 plt.show()
 
 
