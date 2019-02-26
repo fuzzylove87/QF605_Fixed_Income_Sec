@@ -158,7 +158,11 @@ for i in (df[(df['OIS'].notnull())]['Tenor']):
         
     last_row = row_num
     
-
+ps_df = pd.DataFrame([[1,1,Par_Swap_Solver(1,1)], [1,2,Par_Swap_Solver(1,2)], [1,3,Par_Swap_Solver(1,3)], [1,5,Par_Swap_Solver(1,5)], [1,10,Par_Swap_Solver(1,10)],
+                      [5,1,Par_Swap_Solver(5,1)], [5,2,Par_Swap_Solver(5,2)], [5,3,Par_Swap_Solver(5,3)], [5,5,Par_Swap_Solver(5,5)], [5,10,Par_Swap_Solver(5,10)],
+                      [10,1,Par_Swap_Solver(10,1)], [10,2,Par_Swap_Solver(10,2)], [10,3,Par_Swap_Solver(10,3)], [10,5,Par_Swap_Solver(10,5)], [10,10,Par_Swap_Solver(10,10)]
+                      ],columns=['fwd','swap','par_swap_rate'])
+    
 ps_df_1y = pd.DataFrame([['1x1',Par_Swap_Solver(1,1)], ['1x2',Par_Swap_Solver(1,2)], ['1x3',Par_Swap_Solver(1,3)], ['1x5',Par_Swap_Solver(1,5)], ['1x10',Par_Swap_Solver(1,10)]
                         ],columns=['Tenor','Forward Swap Rates'])
 
