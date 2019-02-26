@@ -8,6 +8,7 @@ Created on Sat Feb 16 22:45:56 2019
 import numpy as np
 import pandas as pd
 from scipy.optimize import fsolve
+from matplotlib import pyplot as plt
 
 data=pd.read_excel('IR Data.xlsx',sheet_name='OIS',header=0)
 data_IRS=pd.read_excel('IR Data.xlsx',sheet_name='IRS',header=0)
@@ -125,13 +126,13 @@ def IRS_Solver(df,disc_f,T,coupon_period,Gap=1):
     return Fix - Float
 
 
-def Par_Swap_Solver(fwd,swap,coupon_period=0.5):
+def Par_Swap_Solver(fwd,swap):
     
     #Get swap FV
     S_maturity = fwd+swap
-    float_leg = coupon_period * sum(df[(df['Tenor'] > fwd) & (df['Tenor'] <= S_maturity)]['Fwd_L'] * 
+    float_leg =  sum(df[(df['Tenor'] > fwd) & (df['Tenor'] <= S_maturity)]['Fwd_L'] * 
                                        df[(df['Tenor'] > fwd) & (df['Tenor'] <= S_maturity)]['DF'])
-    disc_f = coupon_period * sum(df[(df['Tenor'] > fwd) & (df['Tenor'] <= S_maturity)]['DF'])
+    disc_f =  sum(df[(df['Tenor'] > fwd) & (df['Tenor'] <= S_maturity)]['DF'])
     
     return float_leg/disc_f
 
@@ -157,7 +158,50 @@ for i in (df[(df['OIS'].notnull())]['Tenor']):
     last_row = row_num
     
 
-ps_df = pd.DataFrame([[1,1,Par_Swap_Solver(1,1)], [1,2,Par_Swap_Solver(1,2)], [1,3,Par_Swap_Solver(1,3)], [1,5,Par_Swap_Solver(1,5)], [1,10,Par_Swap_Solver(1,10)],
-                      [5,1,Par_Swap_Solver(5,1)], [5,2,Par_Swap_Solver(5,2)], [5,3,Par_Swap_Solver(5,3)], [5,5,Par_Swap_Solver(5,5)], [5,10,Par_Swap_Solver(5,10)],
-                      [10,1,Par_Swap_Solver(10,1)], [10,2,Par_Swap_Solver(10,2)], [10,3,Par_Swap_Solver(10,3)], [10,5,Par_Swap_Solver(10,5)], [10,10,Par_Swap_Solver(10,10)]
-                      ],columns=['fwd','swap','par_swap_rate'])
+ps_df_1y = pd.DataFrame([['1x1',Par_Swap_Solver(1,1)], ['1x2',Par_Swap_Solver(1,2)], ['1x3',Par_Swap_Solver(1,3)], ['1x5',Par_Swap_Solver(1,5)], ['1x10',Par_Swap_Solver(1,10)]
+                        ],columns=['Tenor','Forward Swap Rates'])
+
+ps_df_5y = pd.DataFrame([['5x1',Par_Swap_Solver(5,1)], ['5x2',Par_Swap_Solver(5,2)], ['5x3',Par_Swap_Solver(5,3)], ['5x5',Par_Swap_Solver(5,5)], ['5x10',Par_Swap_Solver(5,10)]
+                        ],columns=['Tenor','Forward Swap Rates'])
+
+ps_df_10y = pd.DataFrame([['10x1',Par_Swap_Solver(10,1)], ['10x2',Par_Swap_Solver(10,2)], ['10x3',Par_Swap_Solver(10,3)], ['10x5',Par_Swap_Solver(10,5)], ['10x10',Par_Swap_Solver(10,10)]
+                      ],columns=['Tenor','Forward Swap Rates'])
+
+df_OIS = df[pd.isna(df['OIS']) == False]
+df_IRS = df[pd.isna(df['L']) == False]
+
+## OIS Discount factor ##
+plt.figure(figsize=(5,4))
+plt.title('Discount factors across tenors')
+plt.plot(df['Tenor'],df['DF'], label = 'OIS discount factor')
+plt.scatter(df_OIS ['Tenor'],df_OIS['DF'],label = 'Market observed swaps')
+plt.xlabel('Tenor (Y)')
+plt.ylabel('Discount Factor')
+plt.ylim(bottom=0.8,top=1.05)
+plt.grid()
+plt.legend()
+plt.savefig('OIS_df.jpg', format='jpg', dpi=500)
+plt.show()
+
+
+
+## LIBOR Discount factor ##
+plt.figure(figsize=(5,4))
+plt.title('Discount factors across tenors')
+plt.plot(df['Tenor'],df['L_DF'], label = 'LIBOR discount factor')
+plt.scatter(df_IRS['Tenor'],df_IRS['L_DF'],label = 'Market observed swaps')
+plt.xlabel('Tenor (Y)')
+plt.ylabel('Discount Factor')
+plt.ylim(bottom=0,top=1.05)
+plt.grid()
+plt.legend()
+plt.savefig('LIBOR_df.jpg', format='jpg', dpi=500)
+plt.show()
+
+
+print(df_OIS[['Tenor','OIS','ON','DF']])
+print(df_IRS[['Tenor','L', 'Fwd_L' ,'L_DF']])
+
+print(ps_df_1y)
+print(ps_df_5y)
+print(ps_df_10y)
