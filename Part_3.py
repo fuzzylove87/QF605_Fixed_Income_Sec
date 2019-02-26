@@ -156,7 +156,6 @@ for handle, label in zip(handles, labels):
         handle_list.append(handle)
         label_list.append(label)
 plt.legend(handle_list, label_list)
-#plt.legend(np.unique(labl))
 plt.tight_layout()
 plt.title('The Difference between CMS and Forward Swap Rate')
 plt.xticks(x1, labels, rotation=50)
