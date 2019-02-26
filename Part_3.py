@@ -11,6 +11,7 @@ import Part_1
 from scipy.stats import norm
 from scipy.integrate import quad
 from scipy.interpolate import CubicSpline
+import matplotlib.pylab as plt
 
 # Define necessary functions
 def SABR(F, K, T, alpha, beta, rho, nu):
@@ -63,11 +64,20 @@ def IRR2prime(K,N,n,day):
 def H2Prime(K,N,n,day):
     return (-IRR2prime(K,N,n,day)*K-2*IRR1prime(K,N,n,day))/IRR(K,N,n,day)**2 + \
             2*IRR1prime(K,N,n,day)**2*K/(IRR(K,N,n,day)**3)
+            
+def H2Prime_payoff1(K,N,n,day):
+    return (-IRR2prime(K,N,n,day))/IRR(K,N,n,day)**2 + \
+            2*IRR1prime(K,N,n,day)**2/(IRR(K,N,n,day)**3)
 
 #define function for CMS rate
 def CMS(F,N,n,T,day,alpha, beta, rho, nu):    
     Rec_Integral = quad(lambda x:H2Prime(x,N,n,day)*Black76Rec(F, x, T, SABR(F, x, T, alpha, beta, rho, nu)),0,F)[0]
-    Pay_Integral = quad(lambda x:H2Prime(x,N,n,day)*Black76Pay(F, x, T, SABR(F, x, T, alpha, beta, rho, nu)),F,1)[0]
+    Pay_Integral = quad(lambda x:H2Prime(x,N,n,day)*Black76Pay(F, x, T, SABR(F, x, T, alpha, beta, rho, nu)),F,0.85)[0]
+    return (F + IRR(F,N,n,day)*(Rec_Integral + Pay_Integral))
+
+def CMS_payoff1(F,N,n,T,day,alpha, beta, rho, nu):    
+    Rec_Integral = quad(lambda x:H2Prime_payoff1(x,N,n,day)*Black76Rec(F, x, T, SABR(F, x, T, alpha, beta, rho, nu)),0,F)[0]
+    Pay_Integral = quad(lambda x:H2Prime_payoff1(x,N,n,day)*Black76Pay(F, x, T, SABR(F, x, T, alpha, beta, rho, nu)),F,0.85)[0]
     return (F + IRR(F,N,n,day)*(Rec_Integral + Pay_Integral))
 
 # Solve Question 2 of Part3 
@@ -81,9 +91,25 @@ Cal_Nu = np.array([2.049525533150364,1.6774866429530588,1.4382003710597762,1.064
 Cal_Rho = np.array([-0.6332193032745367,-0.5251242986310645,-0.4828554463440235,-0.4144646583009487,-0.2646156713921493,
                     -0.5842763238509328,-0.5423168017057935,-0.544466832860725,-0.47917055366840167,-0.48508466849870013,
                     -0.5384882907533526,-0.5407507527146742,-0.5280185142134435,-0.5117959528006836,-0.46248079391229163])    
+
+Q2 = (Part_1.ps_df).copy()
+Weight = []
+for i in range(len(Q2)):
+    n=Q2['fwd'][i]
+    T=n
+    N=Q2['swap'][i]+n
+    F=1
+    alpha = Cal_Alpha[i]
+    rho = Cal_Rho[i]
+    nu = Cal_Nu[i]
+    D = Part_1.df['DF'].values[Part_1.df['Tenor'].values==T]
+    Weight += [D*CMS_payoff1(F,N,n,T, 0.5, alpha, 0.9, rho, nu)]
+    
+Weight = pd.DataFrame(Weight, index=Part_1.ps_df.index)
+Q2['Coverage']=Weight
     
 CMSList=[]
-Q2 = (Part_1.ps_df).copy()
+
 for i in range(len(Q2)):
     n=Q2['fwd'][i]
     T=n
@@ -100,6 +126,44 @@ Q2['CMS Rate']=CMSList
 Q2['CMS-Forward'] = (Q2['CMS Rate'] - Part_1.ps_df['par_swap_rate']).values
 print(Q2)
 
+x1 = np.arange(1, 16)
+labels = ['1y X 1y','1y X 2y','1y X 3y','1y X 5y','1y X 10y',
+          '5y X 1y','5y X 2y','5y X 3y','5y X 5y','5y X 10y',
+          '10y X 1y','10y X 2y','10y X 3y','10y X 5y','10y X 10y',]
+legend = []
+col=[]
+
+fig,ax = plt.subplots(figsize=(7,5))
+
+for i in range(len(x1)): 
+    if x1[i] < 6: 
+     col.append('k')
+     legend.append('1Y Expiry')
+    elif 6<= x1[i] <11: 
+     col.append('r')
+     legend.append('5Y Expiry')
+    else: 
+     col.append('b') 
+     legend.append('10Y Expiry')
+
+for i in range(len(x1)): 
+    ax.scatter(x1[i],Q2['CMS-Forward'][i],c=col[i],s=30, linewidth=0, label=legend[i])  
+
+handles, labels = ax.get_legend_handles_labels()
+handle_list, label_list = [], []
+for handle, label in zip(handles, labels):
+    if label not in label_list:
+        handle_list.append(handle)
+        label_list.append(label)
+plt.legend(handle_list, label_list)
+#plt.legend(np.unique(labl))
+plt.tight_layout()
+plt.title('The Difference between CMS and Forward Swap Rate')
+plt.xticks(x1, labels, rotation=50)
+plt.xlabel('Expiry X Tenor')
+plt.ylabel('CMS - Forward Swap Rate')
+plt.grid()
+plt.show()
 
 
 # Solve Question 1 of Part3
