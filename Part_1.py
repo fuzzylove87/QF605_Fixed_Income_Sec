@@ -175,38 +175,42 @@ ps_df_10y = pd.DataFrame([['10x1',Par_Swap_Solver(10,1)], ['10x2',Par_Swap_Solve
 df_OIS = df[pd.isna(df['OIS']) == False]
 df_IRS = df[pd.isna(df['L']) == False]
 
-## OIS Discount factor ##
-plt.figure(figsize=(5,4))
-plt.title('Discount factors across tenors')
-plt.plot(df['Tenor'],df['DF'], label = 'OIS discount factor')
-plt.scatter(df_OIS ['Tenor'],df_OIS['DF'],label = 'Market observed swaps')
-plt.xlabel('Tenor (Y)')
-plt.ylabel('Discount Factor')
-plt.ylim(bottom=0.8,top=1.05)
-plt.grid()
-plt.legend()
-plt.savefig('OIS_df.jpg', format='jpg', dpi=500)
-plt.show()
+def print_job():
+    
+    ## OIS Discount factor ##
+    plt.figure(figsize=(5,4))
+    plt.title('Discount factors across tenors')
+    plt.plot(df['Tenor'],df['DF'], label = 'OIS discount factor')
+    plt.scatter(df_OIS ['Tenor'],df_OIS['DF'],label = 'Market observed swaps')
+    plt.xlabel('Tenor (Y)')
+    plt.ylabel('Discount Factor')
+    plt.ylim(bottom=0.8,top=1.05)
+    plt.grid()
+    plt.legend()
+    plt.savefig('OIS_df.jpg', format='jpg', dpi=500)
+    plt.show()
+    
+    
+    
+    ## LIBOR Discount factor ##
+    plt.figure(figsize=(5,4))
+    plt.title('Discount factors across tenors')
+    plt.plot(df['Tenor'],df['L_DF'], label = 'LIBOR discount factor')
+    plt.scatter(df_IRS['Tenor'],df_IRS['L_DF'],label = 'Market observed swaps')
+    plt.xlabel('Tenor (Y)')
+    plt.ylabel('Discount Factor')
+    plt.ylim(bottom=0,top=1.05)
+    plt.grid()
+    plt.legend()
+    plt.savefig('LIBOR_df.jpg', format='jpg', dpi=500)
+    plt.show()
+    
+    print(df_OIS[['Tenor','OIS','ON','DF']])
+    print(df_IRS[['Tenor','L', 'Fwd_L' ,'L_DF']])
 
-
-
-## LIBOR Discount factor ##
-plt.figure(figsize=(5,4))
-plt.title('Discount factors across tenors')
-plt.plot(df['Tenor'],df['L_DF'], label = 'LIBOR discount factor')
-plt.scatter(df_IRS['Tenor'],df_IRS['L_DF'],label = 'Market observed swaps')
-plt.xlabel('Tenor (Y)')
-plt.ylabel('Discount Factor')
-plt.ylim(bottom=0,top=1.05)
-plt.grid()
-plt.legend()
-plt.savefig('LIBOR_df.jpg', format='jpg', dpi=500)
-plt.show()
-
-
-print(df_OIS[['Tenor','OIS','ON','DF']])
-print(df_IRS[['Tenor','L', 'Fwd_L' ,'L_DF']])
-
-print(ps_df_1y)
-print(ps_df_5y)
-print(ps_df_10y)
+    print(ps_df_1y)
+    print(ps_df_5y)
+    print(ps_df_10y)
+    
+if __name__ == "__main__":
+    print_job()
