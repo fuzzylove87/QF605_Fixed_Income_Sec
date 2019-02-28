@@ -1,0 +1,62 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage[a4paper,
+top=1.5cm,
+bottom=1.5cm,
+left=2.5cm,
+right=2.5cm,
+heightrounded]
+{geometry}
+
+\title{QF 605 \protect \\ Fixed Income\\
+\textbf{Project Part IV- Woon Tian Yong}}
+
+\date{}
+
+\begin{document}
+	
+\maketitle
+
+\par \noindent \textbf{Question 1}\\
+
+\begin{flalign*}
+V_0 &= D(0,T)g(F) + \int_{0}^{F} h''(K) V^{rec}(K)dK + \int_{F}^{\infty} h''(K) V^{pay}(K)dK
+\end{flalign*}
+
+\noindent Where:
+\begin{flalign*}
+g(K) &= K^{\frac{1}{p}} - 0.04^{\frac{1}{q}}\\
+&= K^{\frac{1}{4}}-0.2\\
+g'(K) &= \frac{1}{4} K^{-\frac{3}{4}}\\
+g''(K) &= -\frac{3}{16}K^{-\frac{7}{4}}\\ \\
+h(K) &= \frac{g(K)}{IRR(K)}\\
+h'(K) &= \frac{IRR(K)g'(K)-g(K)IRR'(K)}{IRR(K)^2}\\
+h''(K) &= \frac{IRR(K)g''(K)-IRR''(K)g(K)-2IRR'(k)g'(K)}{IRR(K)^2} + \frac{2IRR'(K)^2g(K)}{IRR(K)^3}
+\end{flalign*}
+
+\par \noindent \textbf{Question 2}\\
+
+\noindent For $S_T^{\frac{1}{4}}-0.2$ to be positive:
+\begin{flalign*}
+S_T^{\frac{1}{4}}& >0.2\\
+S_T &> 0.0016 = L
+\end{flalign*}
+
+\noindent Thus, when $F=S_{n,N}(0)$ and when $F>L$:
+
+\begin{flalign*}
+V_0^+ &= V_0 - \int_{0}^{L} h(K) \frac{\partial^2 V^{rec}(K)}{\partial K^2} dK\\
+&=V_0 - \left(h(L)\frac{\partial V^{rec} (L)}{\partial K} - h'(L) V^{rec} (L) + \int_{0}^{L} h''(K) V^{rec} (K) dK\right)
+\end{flalign*}
+
+\noindent Alternatively, when $F<L$, we can see $V_0^+$ as a CMS caplet struck at $L=0.0016$, thus:
+
+\begin{flalign*}
+V_0^+ &= D(0,T) \int_{L}^{\infty} g(K)f(K) dK\\
+&=\int_{L}^{\infty} h(K) \frac{\partial^2 V^{pay }(K)}{\partial K^2} dK\\
+&= -h(L)\frac{\partial V^{pay}(L)}{\partial K} + h'(L) V^{pay} (L) + \int_{L}^{\infty} h''(K) V^{pay}(K)dK
+\end{flalign*}
+
+\end{document}
