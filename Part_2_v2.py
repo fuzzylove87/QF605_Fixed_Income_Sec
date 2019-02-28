@@ -170,7 +170,7 @@ def Black76Rec(F, K, T, sigma):
     return (K*ss.norm.cdf(-d2) - F*ss.norm.cdf(-d1))
 
 def interpol(x1,y1,x2,y2,x):
-    return y1+x*((y2-y1)/(x2-x1))
+    return y1+(x-x1)*((y2-y1)/(x2-x1))
 
 #Parameters
 strike=np.arange(0.01,0.081,0.01)
@@ -228,7 +228,7 @@ def impliedVolatility(S, K, price, T, Beta):
     return impliedVol
 
 for ex in Expiry:
-    fig=plt.figure(figsize=(20,20))
+    fig=plt.figure(figsize=(5,5))
     ax=plt.axes()
     ax=plt.title('Tenor=%s' %te)
     for te,i in zip(Tenor,range(5)):
@@ -247,7 +247,7 @@ for ex in Expiry:
         #Graph modify
         ax=plt.title((ex,te))
         ax=plt.legend()
-    plt.savefig('%s'%te,dpi=100)
+    plt.savefig('%s'%ex,dpi=100)
     plt.show()
 
 SABR_Alpha.to_csv('Alpha.csv')
@@ -255,8 +255,8 @@ SABR_Rho.to_csv('Rho.csv')
 SABR_Nu.to_csv('Nu.csv')
 
 
-
-
+value1.to_csv('Value1.csv')
+value2.to_csv('Value2.csv')
 
 
 
