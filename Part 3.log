@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6730 64-bit) (preloaded format=pdflatex 2018.8.28)  28 FEB 2019 17:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6730 64-bit) (preloaded format=pdflatex 2018.8.28)  28 FEB 2019 19:21
 entering extended mode
 **"./Part 3.tex"
 ("Part 3.tex"
@@ -1605,45 +1605,82 @@ LaTeX Font Info:    Font shape `T1/XCharter-TLF/b/n' will be
 (Font)              scaled to size 14.4pt on input line 44.
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/b/n' will be
 (Font)              scaled to size 12.0pt on input line 46.
-<Coverage.png, id=4, 469.755pt x 369.38pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 47--48
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 49--50
+
+ []
+
+<Cubic_10y.png, id=4, 867.24pt x 289.08pt>
+File: Cubic_10y.png Graphic file (type png)
+<use Cubic_10y.png>
+Package pdftex.def Info: Cubic_10y.png  used on input line 53.
+(pdftex.def)             Requested size: 433.61894pt x 144.53964pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 65--66
+
+ []
+
+<Cubic_2y.png, id=6, 867.24pt x 289.08pt>
+File: Cubic_2y.png Graphic file (type png)
+<use Cubic_2y.png>
+Package pdftex.def Info: Cubic_2y.png  used on input line 69.
+(pdftex.def)             Requested size: 433.61894pt x 144.53964pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[1
+
+{C:/Users/ykfri/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map} <./Cubic_10y
+.png>]
+<Coverage.png, id=19, 469.755pt x 369.38pt>
 File: Coverage.png Graphic file (type png)
 <use Coverage.png>
-Package pdftex.def Info: Coverage.png  used on input line 55.
+Package pdftex.def Info: Coverage.png  used on input line 85.
 (pdftex.def)             Requested size: 234.87692pt x 184.68954pt.
-<CMS_RATE.png, id=6, 702.12312pt x 239.89626pt>
+<CMS_RATE.png, id=20, 702.12312pt x 239.89626pt>
 File: CMS_RATE.png Graphic file (type png)
 <use CMS_RATE.png>
-Package pdftex.def Info: CMS_RATE.png  used on input line 63.
+Package pdftex.def Info: CMS_RATE.png  used on input line 93.
 (pdftex.def)             Requested size: 351.0607pt x 119.94783pt.
- [1
 
-{C:/Users/ykfri/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map} <./Coverage.
-png> <./CMS_RATE.png>]
-<CMS_FSR.png, id=17, 511.9125pt x 415.5525pt>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[2 <./Cubic_2y.png> <./Coverage.png>]
+<CMS_FSR.png, id=26, 511.9125pt x 415.5525pt>
 File: CMS_FSR.png Graphic file (type png)
 <use CMS_FSR.png>
-Package pdftex.def Info: CMS_FSR.png  used on input line 73.
+Package pdftex.def Info: CMS_FSR.png  used on input line 103.
 (pdftex.def)             Requested size: 255.95563pt x 207.77574pt.
- [2 <./CMS_FSR.png>] ("Part 3.aux") ) 
+ [3 <./CMS_RATE.png> <./CMS_FSR.png>]
+("Part 3.aux") ) 
 Here is how much of TeX's memory you used:
- 27842 strings out of 492973
- 528087 string characters out of 3126692
- 560513 words of memory out of 3000000
- 31283 multiletter control sequences out of 15000+200000
+ 27852 strings out of 492973
+ 528250 string characters out of 3126692
+ 563513 words of memory out of 3000000
+ 31291 multiletter control sequences out of 15000+200000
  578977 words of font info for 69 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 69i,7n,65p,908b,317s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Users/ykfri/AppData/Local/Programs/MiK
-TeX 2.9/fonts/enc/dvips/xcharter/xch_a3psji.enc}{C:/Users/ykfri/AppData/Local/P
-rograms/MiKTeX 2.9/fonts/enc/dvips/xcharter/xch_tuu2ww.enc}<C:/Users/ykfri/AppD
-ata/Local/Programs/MiKTeX 2.9/fonts/type1/public/xcharter/XCharter-Bold.pfb><C:
-/Users/ykfri/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/xcharter/XCha
-rter-Roman.pfb><C:/Users/ykfri/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/pu
-blic/amsfonts/cm/cmmi10.pfb><C:/Users/ykfri/AppData/Local/Programs/MiKTeX 2.9/f
-onts/type1/public/amsfonts/cm/cmr10.pfb>
-Output written on "Part 3.pdf" (2 pages, 257826 bytes).
+ 69i,8n,65p,908b,317s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Users/ykfri/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvi
+ps/xcharter/xch_a3psji.enc}{C:/Users/ykfri/AppData/Local/Programs/MiKTeX 2.9/fo
+nts/enc/dvips/xcharter/xch_tuu2ww.enc}<C:/Users/ykfri/AppData/Local/Programs/Mi
+KTeX 2.9/fonts/type1/public/xcharter/XCharter-Bold.pfb><C:/Users/ykfri/AppData/
+Local/Programs/MiKTeX 2.9/fonts/type1/public/xcharter/XCharter-Roman.pfb><C:/Us
+ers/ykfri/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi
+10.pfb><C:/Users/ykfri/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/ams
+fonts/cm/cmmi7.pfb><C:/Users/ykfri/AppData/Local/Programs/MiKTeX 2.9/fonts/type
+1/public/amsfonts/cm/cmr10.pfb><C:/Users/ykfri/AppData/Local/Programs/MiKTeX 2.
+9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/ykfri/AppData/Local/Program
+s/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on "Part 3.pdf" (3 pages, 350339 bytes).
 PDF statistics:
- 37 PDF objects out of 1000 (max. 8388607)
+ 56 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 28 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 38 words of extra memory for PDF output out of 10000 (max. 10000000)
 

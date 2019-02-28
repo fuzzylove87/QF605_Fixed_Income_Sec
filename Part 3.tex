@@ -43,11 +43,41 @@
 	
 	\section*{Part 3 - Convexity Correction} % Numbered section
 	
-	\subsection*{Valuing CMS Leg}	
-
+	\subsection*{Present value of CMS product}	
+	\noindent To calculate PV of leg receiving CMS10y semi-annually over the next 5 years, we need to find SABR paramters at different expiries in order to price each CMS rate. To this end, cubic spline interpolation is used between $\alpha$ $\nu$, $\rho$ of $1y$ $\times$ $10y$, $5y\times10y$ and $10y\times10y$ SABR models we have calibrated. Sine there was no expiry lower than 1y for us to interpolate, parameters for 0.5y expiry follows those of 1y expiry.\\
+	
+	Interpolation profiles are given as follow:\\
+	
+	\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.5]{Cubic_10y.png}
+	\caption{Interpolation of SABR parameters - CMS10Y}
+	\end{figure}	
+	
+	\noindent After interpolating all the SABR parameters, static replication is used to price each CMS rate and PV is the sum of the discounted values of all CMS rates, multiplied by the day count fraction. Here goes the mathematical form:
+	\begin{align*}
+	PV_{CMS10y}&=D(0,6m)\times 0.5 \times E^T [S_{6m,10y6m}(6m)] \\&+ D(0,1y) \times 0.5 \times E^T [S_{1y,11y}(1y)]\\&+ \dots 
+	+D(0,5y) \times 0.5 \times E^T [S_{5y,15y}(5y)]\\&= 0.213606
+	\end{align*}
+	
+	
+	
+	\noindent Similarly, for CMS2y processed quarterly, $\alpha$ $\nu$, $\rho$ can be interpolated between $1y$ $\times$ $2y$, $5y\times2y$,$10y\times2y$, whose profiles are demonstrated below:\\ 
+	
+	\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.5]{Cubic_2y.png}
+	\caption{Interpolation of SABR parameters - CMS2Y}
+	\end{figure}	
+	
+	\noindent In addition to SABR interpolation, due to quarterly arrangement, more discrete OIS discount rates and Libor discount rates are interpolated based on DF calculated in Section 1. After getting all the inputs, we can calculate PV of CMS2y as follow:
+	\begin{align*}
+	PV_{CMS2y}&=D(0,3m)\times 0.25 \times E^T [S_{3m,2y3m}(3m)] \\&+ D(0,6m) \times 0.25 \times E^T [S_{6m,2y6m}(6m)]\\&+ \dots 
+	+D(0,10y) \times 0.25 \times E^T [S_{10y,12y}(10y)]\\&= 0.504841
+	\end{align*}
 
 	
-	\subsection*{Static replication for CMS rate}
+	\subsection*{CMS VS Par Swap Rate}
 	Through trial and error, we found out that the CMS rates can become unlikely large numbers or even drop below par swap rate when upper bound for payer swaption integral is set as a large number or infinity. To figure out the optimal upper bound that not only covers most of the cases but generates plausible CMS rates, we calculated pure $f(K)$ in CMS rate formula by setting the payoff function as constant 1. When the upper bound is 0.85, no value exceeded 1, and CMS rates converged on reasonable readings.
 
 	\begin{figure}[h]
