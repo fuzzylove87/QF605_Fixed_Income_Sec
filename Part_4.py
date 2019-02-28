@@ -172,6 +172,11 @@ plt.show()
 '''
 
 plt.figure(figsize=(6,4.5))
+<<<<<<< HEAD
+=======
+plt.plot(CMS_df['Tenor'][0:5],CMS_df['CMS Rate'][0:5]**(1/4),color='k',linewidth=2.5,label='Spot Price of Underlying',zorder=3)
+plt.scatter(CMS_df['Tenor'][0:5],CMS_df['CMS Rate'][0:5]**(1/4),zorder=4,edgecolors='k',label='_nolegend_',linewidths=2.5,c='w',marker='o',s=35)
+>>>>>>> 82a8600d2ec11efe755bdaf0a725a1fa7bbf1a9f
 plt.plot(CMS_df['Tenor'][0:5],CMS_df['CMS Rate P4'][0:5],color='b',linewidth=2.5,label='CMS Forward Contract Value',zorder=3)
 plt.scatter(CMS_df['Tenor'][0:5],CMS_df['CMS Rate P4'][0:5],zorder=4,edgecolors='b',label='_nolegend_',linewidths=2.5,c='w',marker='o',s=35)
 plt.plot(CMS_df['Tenor'][0:5],CMS_df['CMS Caplet P4'][0:5],color='r',linewidth=2.5,label='CMS Caplet Value',zorder=3)
@@ -181,11 +186,20 @@ plt.ylabel('Contract Value', fontweight='bold')
 plt.title('When n=1', fontweight='bold')
 plt.grid(zorder=0)
 plt.legend(loc='lower right')
+<<<<<<< HEAD
 plt.axis([0,11,0.15,0.25])
+=======
+plt.axis([0,11,0.14,0.47])
+>>>>>>> 82a8600d2ec11efe755bdaf0a725a1fa7bbf1a9f
 plt.savefig('P4n1',dpi=800)
 plt.show()
 
 plt.figure(figsize=(6,4.5))
+<<<<<<< HEAD
+=======
+plt.plot(CMS_df['Tenor'][5:10],CMS_df['CMS Rate'][5:10]**(1/4),color='k',linewidth=2.5,label='Spot Price of Underlying',zorder=3)
+plt.scatter(CMS_df['Tenor'][5:10],CMS_df['CMS Rate'][5:10]**(1/4),zorder=4,edgecolors='k',label='_nolegend_',linewidths=2.5,c='w',marker='o',s=35)
+>>>>>>> 82a8600d2ec11efe755bdaf0a725a1fa7bbf1a9f
 plt.plot(CMS_df['Tenor'][5:10],CMS_df['CMS Rate P4'][5:10],color='b',linewidth=2.5,label='CMS Forward Contract Value',zorder=3)
 plt.scatter(CMS_df['Tenor'][5:10],CMS_df['CMS Rate P4'][5:10],zorder=4,edgecolors='b',label='_nolegend_',linewidths=2.5,c='w',marker='o',s=35)
 plt.plot(CMS_df['Tenor'][5:10],CMS_df['CMS Caplet P4'][5:10],color='r',linewidth=2.5,label='CMS Caplet Value',zorder=3)
@@ -195,11 +209,20 @@ plt.ylabel('Contract Value', fontweight='bold')
 plt.title('When n=5', fontweight='bold')
 plt.grid(zorder=0)
 plt.legend(loc='lower right')
+<<<<<<< HEAD
 plt.axis([0,11,0,0.27])
+=======
+plt.axis([0,11,0,0.54])
+>>>>>>> 82a8600d2ec11efe755bdaf0a725a1fa7bbf1a9f
 plt.savefig('P4n5',dpi=800)
 plt.show()
 
 plt.figure(figsize=(6,4.5))
+<<<<<<< HEAD
+=======
+plt.plot(CMS_df['Tenor'][10:15],CMS_df['CMS Rate'][10:15]**(1/4),color='k',linewidth=2.5,label='Spot Price of Underlying',zorder=3)
+plt.scatter(CMS_df['Tenor'][10:15],CMS_df['CMS Rate'][10:15]**(1/4),zorder=4,edgecolors='k',label='_nolegend_',linewidths=2.5,c='w',marker='o',s=35)
+>>>>>>> 82a8600d2ec11efe755bdaf0a725a1fa7bbf1a9f
 plt.plot(CMS_df['Tenor'][10:15],CMS_df['CMS Rate P4'][10:15],color='b',linewidth=2.5,label='CMS Forward Contract Value',zorder=3)
 plt.scatter(CMS_df['Tenor'][10:15],CMS_df['CMS Rate P4'][10:15],zorder=4,edgecolors='b',label='_nolegend_',linewidths=2.5,c='w',marker='o',s=35)
 plt.plot(CMS_df['Tenor'][10:15],CMS_df['CMS Caplet P4'][10:15],color='r',linewidth=2.5,label='CMS Caplet Value',zorder=3)
@@ -209,7 +232,11 @@ plt.ylabel('Contract Value', fontweight='bold')
 plt.title('When n=10', fontweight='bold')
 plt.grid(zorder=0)
 plt.legend(loc='lower right')
+<<<<<<< HEAD
 plt.axis([0,11,-0.05,0.3])
+=======
+plt.axis([0,11,-0.1,0.65])
+>>>>>>> 82a8600d2ec11efe755bdaf0a725a1fa7bbf1a9f
 plt.savefig('P4n10',dpi=800)
 plt.show()
 
