@@ -2,7 +2,8 @@
 """
 Created on Sun Feb 24 13:35:11 2019
 
-@author: Jin Weiguo, Kim ChanJung
+@author: Jin Weiguo, Johnny Quek, Kim ChanJung, Wang Boyu, Woon Tian Yong
+
 """
 
 import numpy as np
@@ -115,7 +116,6 @@ for i in range(len(Q2)):
     T=n
     N=Q2['swap'][i]+n
     F=Q2['par_swap_rate'][i]
-    #D=Part_1.df['DF'].values[Part_1.df['Tenor'].values==T][0]
     alpha = Cal_Alpha[i]
     rho = Cal_Rho[i]
     nu = Cal_Nu[i]
@@ -265,7 +265,6 @@ for i in range(len(x2)):
     Inter_Alpha2[i+3] = Alpha2(x2[i])
     Inter_Rho2[i+3] = Rho2(x2[i])
     Inter_Nu2[i+3] = Nu2(x2[i])    
-#    Inter_CMS2Y[i+3] = Part_1.Par_Swap_Solver(x2[i],2,0.25)
 
 fig5, ax1 = plt.subplots(1,3, figsize=(12, 4), tight_layout=True )
 
@@ -305,7 +304,6 @@ DF.set_index('Tenor',drop=False,inplace=True)
 DF2.set_index('Tenor',drop=False,inplace=True)
 
 DF3=pd.concat([DF2,DF],axis=1,sort=True)
-#DF3.dropna(axis=1,how='all')
 DF3.drop(columns=DF3.columns[0:2],inplace=True)
 
 DF3.iloc[0,2]=DF3.iloc[1,2]
@@ -333,7 +331,6 @@ for i in range(len(Expiry2)):
     alpha = Inter_Alpha2[i]
     rho = Inter_Rho2[i]
     nu = Inter_Nu2[i]
-#    0.25*df2*CMS(F,N,n,T,025,alpha, 0.9, rho, nu)
     CMS2Leg += [day*df2*CMS(F,N,n,T,0.25,alpha, 0.9, rho, nu)]
 
 print("The present value of CMS2Y leg is %s" %(np.sum(CMS2Leg)))
